@@ -6,7 +6,6 @@
     <title>App Download</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -15,7 +14,6 @@
             align-items: center;
             min-height: 100vh;
         }
-
         .card {
             background: white;
             border-radius: 20px;
@@ -25,21 +23,9 @@
             max-width: 380px;
             width: 90%;
         }
-
         .icon { font-size: 60px; margin-bottom: 15px; }
-
-        h1 {
-            color: #1a1a2e;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
+        h1 { color: #1a1a2e; font-size: 24px; margin-bottom: 8px; }
+        p { color: #666; font-size: 14px; margin-bottom: 25px; }
         .btn {
             background: linear-gradient(135deg, #4CAF50, #2e7d32);
             color: white;
@@ -52,19 +38,8 @@
             display: inline-block;
             width: 100%;
         }
-
-        .info {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #999;
-        }
-
-        .debug {
-            margin-top: 15px;
-            font-size: 11px;
-            color: #aaa;
-            word-break: break-all;
-        }
+        .info { margin-top: 20px; font-size: 12px; color: #999; }
+        .debug { margin-top: 15px; font-size: 11px; color: #aaa; word-break: break-all; }
     </style>
 </head>
 <body>
@@ -78,23 +53,24 @@
     </div>
 
     <script>
-        // URL se clickid pakdo
         const params = new URLSearchParams(window.location.search);
-        const clickid = params.get('clickid') || '';
+        
+        // Offer18 aff_click_id parameter
+        const affClickId = params.get('aff_click_id') || '';
+        const subAffId = params.get('sub_aff_id') || '';
 
-        // Debug - clickid page pe dikhega
+        // Debug info
         document.getElementById('debugInfo').innerText = 
-            clickid ? 'Tracking ID: ' + clickid : 'Direct visit - no tracking';
+            affClickId ? 'Tracking ID: ' + affClickId : 'Direct visit - no tracking';
 
-        // APK URL - Repository se direct
+        // APK URL
         const apkBase = "https://raw.githubusercontent.com/roshanlal150899-blip/myapp-download/main/app-debug.apk";
 
-        // Final URL with clickid
-        const finalURL = clickid 
-            ? apkBase + "?clickid=" + clickid 
+        // Final URL with tracking params
+        const finalURL = affClickId 
+            ? apkBase + "?aff_click_id=" + affClickId + "&sub_aff_id=" + subAffId
             : apkBase;
 
-        // Button ko link do
         document.getElementById('downloadBtn').href = finalURL;
     </script>
 </body>
