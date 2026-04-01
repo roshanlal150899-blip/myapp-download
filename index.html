@@ -54,22 +54,22 @@
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        
-        // Offer18 aff_click_id parameter
         const affClickId = params.get('aff_click_id') || '';
-        const subAffId = params.get('sub_aff_id') || '';
+        const affId = params.get('aff_id') || 'unknown';
+        const subAffId = params.get('sub_aff_id') || 'direct';
+
+        // Apps Script URL
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyDRZDGc-zJyx6vesfRaV39zSXDeWkyP3n5TXnXjJrgfvLw_UrtwviU1Cw6jsgpMXVN/exec";
 
         // Debug info
         document.getElementById('debugInfo').innerText = 
             affClickId ? 'Tracking ID: ' + affClickId : 'Direct visit - no tracking';
 
-        // APK URL
-        const apkBase = "https://raw.githubusercontent.com/roshanlal150899-blip/myapp-download/main/app-debug.apk";
-
-        // Final URL with tracking params
-        const finalURL = affClickId 
-            ? apkBase + "?aff_click_id=" + affClickId + "&sub_aff_id=" + subAffId
-            : apkBase;
+        // Apps Script pe redirect karo - wo APK download page dikhayega
+        const finalURL = scriptURL + 
+            "?aff_click_id=" + affClickId + 
+            "&aff_id=" + affId + 
+            "&sub_aff_id=" + subAffId;
 
         document.getElementById('downloadBtn').href = finalURL;
     </script>
